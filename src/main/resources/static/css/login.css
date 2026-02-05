@@ -1,0 +1,75 @@
+/* ===========================
+   Base
+=========================== */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    position: relative;
+    background-color: #f0f2f5;
+}
+
+/* ===========================
+   Fondo ARCSA desenfocado
+=========================== */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background-image: url('/image/arcsa.png');
+    background-size: 90vw auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    filter: blur(8px);
+    opacity: 0.25;
+
+    z-index: -1;
+}
+
+/* ===========================
+   Card login
+=========================== */
+.login-card {
+    width: 100%;
+    max-width: 460px;
+    border-radius: 14px;
+    background-color: rgba(255, 255, 255, 0.96);
+}
+.eye-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0 6px;
+}
+
+.eye-btn:hover {
+    opacity: 0.7;
+}
+#togglePassword {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+#togglePassword i {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+#togglePassword:hover i {
+    color: #007bff;
+}
+/* Esto cambiará ambos al mismo tiempo */
+.text-primary, .btn-primary {
+    background-color: #004b87 !important; /* Color institucional */
+    border-color: #004b87 !important;
+    color: white; /* Para el texto del botón */
+}
+
+h2.text-primary {
+    background-color: transparent !important; /* El título no lleva fondo */
+    color: #004b87 !important; /* El texto del título sí */
+}

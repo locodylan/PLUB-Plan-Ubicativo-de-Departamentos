@@ -1,0 +1,560 @@
+/* ===============================
+   FONDO GENERAL
+   =============================== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    /* 👈 IMPORTANTE */
+    background-color: #f4f6f9;
+    text-align: center;
+}
+.navigation-side {
+    flex: 1.5; /* El carrusel sigue siendo importante */
+}
+/* Fondo sutil */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background-image: url('/image/arcsa.png');
+    background-size: 90vw auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    filter: blur(8px);
+    opacity: 0.25;
+
+    z-index: -1;
+}
+
+/* --- HEADER Y BARRA SUPERIOR --- */
+.header-bar {
+    background-color: #004b87 !important; /* Azul UG */
+    color: white;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-ug {
+    height: 45px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-name {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    /* espacio entre botón y logo */
+}
+
+/* --- BOTÓN REGRESAR --- */
+.btn-regresar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    color: white;
+    border: 1.5px solid rgba(255, 255, 255, 0.7);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.btn-regresar:hover {
+    background: white;
+    color: #004b87 !important; /* Azul al hacer hover */
+}
+
+
+.btn-regresar i {
+    font-size: 1.3rem;
+}
+
+
+.pantalla-marco {
+    position: relative;
+}
+
+/* --- TÍTULO DEL ESPACIO (CARD) --- */
+.titulo-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #004b87, #003561) !important; /* Gradiente Institucional */
+    color: white;
+    padding: 8px 22px;
+    border-radius: 12px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    box-shadow: 0 6px 18px rgba(0, 75, 135, 0.3);
+    margin-bottom: 14px;
+}
+
+.titulo-icono {
+    font-size: 1.4rem;
+}
+.titulo-espacio {
+    letter-spacing: 0.6px;
+}
+
+/* ===============================
+   CARRUSEL (CLAVE 🔥)
+   =============================== */
+.carousel-container {
+    width: 92vw;
+    max-width: 1200px; /* 👈 aprovecha pantallas grandes */
+    margin: 18px auto; /* 👈 menos espacio vertical */
+}
+
+/* 👇 AQUÍ AJUSTAS LA ALTURA */
+.carousel-img {
+    width: 100%;
+    height: 580px; /* 👈 más horizontal */
+    background-size: cover;
+    background-position: center 60%; /* 👈 recorte inteligente */
+    background-repeat: no-repeat;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+
+/* Botones */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.65);
+    color: white;
+    border: none;
+    font-size: 36px;
+    padding: 14px 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.carousel-btn.left {
+    left: 15px;
+}
+
+.carousel-btn.right {
+    right: 15px;
+}
+
+.carousel-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* --- CAJA DE INDICACIONES --- */
+#indicacion-box {
+    max-width: 900px;
+    margin: 25px auto 10px;
+    padding: 18px 25px;
+    background: linear-gradient(135deg, #004b87, #084298) !important;
+    color: white;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 75, 135, 0.35);
+}
+
+#indicacion {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* ===============================
+   PROGRESO
+   =============================== */
+.progreso-container {
+    max-width: 720px;
+    margin: 25px auto 10px;
+    text-align: left;
+}
+
+.progreso-texto {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #495057;
+    margin-bottom: 6px;
+}
+
+.progreso-barra {
+    height: 12px;
+    border-radius: 10px;
+    background-color: #e9ecef;
+    overflow: hidden;
+}
+
+.progreso-fill {
+    background: linear-gradient(90deg, #0d6efd, #0a58ca);
+    transition: width 0.4s ease;
+}
+
+/* ===============================
+   RESPONSIVE
+   =============================== */
+@media (max-width: 768px) {
+    .carousel-img {
+        height: 48vh; /* no tan alto */
+    }
+
+    .titulo-card {
+        font-size: 1.1rem;
+    }
+}
+
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #cfd8dc;
+    cursor: pointer;
+}
+
+.dot.active {
+    background: #0d6efd;
+}
+
+/* ===============================
+   # BOTON FULLSCREEN
+   =============================== */
+
+.fullscreen-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.65);
+    color: white;
+    border: none;
+    padding: 10px 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    z-index: 20;
+}
+
+.fullscreen-btn:hover {
+    background: rgba(0, 0, 0, 0.85);
+}
+
+.carousel-img {
+    transition: transform 0.6s ease;
+}
+
+.carousel-img:hover {
+    transform: scale(1.04);
+}
+.gm-card {
+    animation: gmCardIn 280ms cubic-bezier(0.4, 0.0, 0.2, 1) both;
+}
+
+@keyframes gmCardIn {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+.gm-motion {
+    animation: gmFadeSlide 320ms cubic-bezier(0.4, 0.0, 0.2, 1) both;
+}
+
+@keyframes gmFadeSlide {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.carousel-img {
+    transition:
+        background-image 0.2s ease,
+        transform 240ms cubic-bezier(0.4, 0.0, 0.2, 1),
+        opacity 200ms ease;
+}
+.gm-hover {
+    transition: box-shadow 180ms cubic-bezier(0.4, 0.0, 0.2, 1),
+                transform 180ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.gm-hover:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+/* ===============================
+   # TRANSICIONES DE RUTA (MAPS)
+   =============================== */
+
+.carousel-img {
+    transition: none;
+}
+
+/* Avanzar */
+.route-next {
+    animation: routeNext 320ms cubic-bezier(0.4, 0.0, 0.2, 1) both;
+}
+
+/* Retroceder */
+.route-prev {
+    animation: routePrev 320ms cubic-bezier(0.4, 0.0, 0.2, 1) both;
+}
+
+@keyframes routeNext {
+    from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes routePrev {
+    from {
+        opacity: 0;
+        transform: translateY(-16px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Indicaciones acompañan la ruta */
+#indicacion-box {
+    transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.indicacion-enter {
+    opacity: 0;
+    transform: translateY(8px);
+}
+.route-end {
+    animation: pulseEnd 400ms ease;
+}
+
+@keyframes pulseEnd {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.015); }
+    100% { transform: scale(1); }
+}
+/* ===============================
+   # MINI MAPA DE PROGRESO
+   =============================== */
+
+.mini-map {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: 18px auto;
+}
+
+.mini-step {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ced4da;
+    position: relative;
+}
+
+.mini-step::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: 18px;
+    height: 3px;
+    background: #ced4da;
+    transform: translateY(-50%);
+}
+
+.mini-step:last-child::after {
+    display: none;
+}
+
+.mini-step.done {
+    background: #74b9ff;
+}
+
+.mini-step.active {
+    background: #0d6efd;
+    box-shadow: 0 0 0 6px rgba(13,110,253,0.25);
+    animation: pulseDot 1.5s infinite;
+}
+
+@keyframes pulseDot {
+    0% { box-shadow: 0 0 0 0 rgba(13,110,253,0.4); }
+    70% { box-shadow: 0 0 0 8px rgba(13,110,253,0); }
+    100% { box-shadow: 0 0 0 0 rgba(13,110,253,0); }
+}
+/* ===============================
+   # BOTÓN GPS AUTOPLAY
+   =============================== */
+
+.gps-play-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #004b87 !important;
+    color: white;
+    border: none;
+    font-size: 26px;
+    box-shadow: 0 10px 30px rgba(0, 75, 135, 0.45) !important;
+    cursor: pointer;
+    z-index: 100;
+    transition: transform 0.2s ease, background 0.2s;
+}
+
+.gps-play-btn:hover {
+    transform: scale(1.05);
+    background: #003561
+}
+/* ===============================
+   # BOTÓN VOZ (GPS STYLE)
+   =============================== */
+
+.voz-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px; /* 👈 derecha */
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #004b87 !important;
+    color: white;
+    border: none;
+    font-size: 24px;
+    box-shadow: 0 10px 30px rgba(0, 75, 135, 0.45) !important;
+    cursor: pointer;
+    z-index: 100;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: transform 0.2s ease, background 0.2s;
+}
+
+.voz-btn:hover {
+    transform: scale(1.05);
+    background: #003561 !important;
+}
+
+.voz-btn:active {
+    transform: scale(0.95);
+}
+.main-content {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    align-items: flex-start;
+}
+.map-overlay {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 180px;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #004b87;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 30;
+    /* Efecto 3D */
+    transform: perspective(500px) rotateY(-5deg);
+    transition: transform 0.3s ease;
+}
+
+.map-overlay:hover {
+    transform: perspective(500px) rotateY(0deg) scale(1.1);
+}
+.map-side {
+    flex: 1; /* La columna del mapa a la derecha */
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    height: 500px; /* Ajusta según prefieras */
+    display: flex;
+    flex-direction: column;
+}
+
+.map-big-container {
+    position: relative;
+    flex-grow: 1;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.plano-grande {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Para que se vea el plano completo sin zoom */
+}
+
+.user-marker {
+    position: absolute;
+    color: #e63946;
+    font-size: 2rem;
+    transition: all 0.5s ease-in-out;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.map-title {
+    font-size: 1.1rem;
+    color: #004b87;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.plano-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+}
+
+.user-marker {
+    position: absolute;
+    color: #ff0000;
+    font-size: 1.5rem;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Movimiento suave */
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5));
+    z-index: 31;
+}

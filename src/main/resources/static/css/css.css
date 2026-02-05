@@ -1,0 +1,541 @@
+/* Fondo general */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;   /* 👈 IMPORTANTE */
+    background-color: #f4f6f9;
+    text-align: center;
+}
+#planoPreview {
+    position: relative; /* Crucial: contenedor relativo */
+    display: inline-block; /* Para que la imagen quede dentro sin ocupar todo */
+    max-width: 100%;       /* Para que sea responsive */
+}
+
+#planoImagen {
+    width: 100%;   /* La imagen se adapta al contenedor */
+    height: auto;  /* Mantiene proporción */
+    display: block;
+}
+
+/* Imagen de fondo sutil */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background-image: url('/image/arcsa.png');
+    background-size: 90vw auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    filter: blur(8px);
+    opacity: 0.25;
+
+    z-index: -1;
+}
+/* --- VARIABLES GLOBALES --- */
+:root {
+    --azul-ug: #004b87;
+    --azul-ug-hover: #003561;
+}
+
+/* --- ENCABEZADO Y BARRA SUPERIOR --- */
+.header-bar {
+    background-color: var(--azul-ug) !important; /* Azul institucional */
+    color: white;
+    padding: 12px 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* --- BOTONES PERSONALIZADOS --- */
+/* Botón de Consulta y Guardar */
+.btn-primary, .btn-agregar {
+    background-color: var(--azul-ug) !important;
+    border-color: var(--azul-ug) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    border-radius: 6px !important;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover, .btn-agregar:hover {
+    background-color: var(--azul-ug-hover) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 75, 135, 0.3);
+}
+
+/* Botón de Cerrar Sesión (Outline) */
+.btn-outline-light {
+    border-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.btn-outline-light:hover {
+    background-color: white !important;
+    color: var(--azul-ug) !important;
+}
+
+/* --- TÍTULOS --- */
+h1.text-primary {
+    color: var(--azul-ug) !important;
+}
+
+/* --- CONTROLES DE FORMULARIO (Inputs y Selects) --- */
+.form-select:focus, .form-control:focus {
+    border-color: var(--azul-ug) !important;
+    box-shadow: 0 0 0 0.25rem rgba(0, 75, 135, 0.25) !important;
+}
+
+/* --- MODALES --- */
+.modal-header {
+    background-color: var(--azul-ug);
+    color: white;
+}
+
+/* Para mantener el botón de cerrar del modal blanco */
+.btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* --- MARCADOR EN EL PLANO --- */
+.marker {
+    background: #dc3545; /* Rojo para que resalte sobre el plano */
+    border: 2px solid white;
+}
+/* Título principal */
+h1 {
+    color: #004b87;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+/* Botones principales */
+.main-buttons .btn {
+    min-width: 200px;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 12px 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.main-buttons .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+/* Colores personalizados de botones */
+.btn-info { background-color: #004b87; color: #fff; }
+.btn-warning { background-color: #ffc107; color: #212529; }
+.btn-success { background-color: #28a745; color: #fff; }
+
+/* Card de consulta */
+.card-consulta {
+    max-width: 500px;
+    margin: 0 auto 50px auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    background: linear-gradient(145deg, #ffffff, #e9f0ff);
+    border: none;
+}
+
+.card-consulta h2 {
+    color: #004b87;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+}
+
+.card-consulta input {
+    font-size: 1rem;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+}
+
+.card-consulta button {
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 10px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.card-consulta button:hover {
+    transform: translateY(-2px);
+}
+.marker {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: red;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 1.5s infinite;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Tooltip con el nombre */
+.marker::after {
+  content: attr(data-text);
+  position: absolute;
+  bottom: 160%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+  opacity: 1; /* 👈 SIEMPRE VISIBLE */
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255,0,0,0.6); }
+  70% { box-shadow: 0 0 0 10px rgba(255,0,0,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,0,0,0); }
+}
+.header-bar {
+    background-color: #004b87;
+    color: white;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-ug {
+    height: 45px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.user-name {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* ===============================
+   # CARRUSEL GRANDE (GUIA VISUAL)
+   =============================== */
+
+.carousel-container {
+    position: relative;
+    width: 95vw;              /* # casi todo el ancho de la pantalla */
+    max-width: 1100px;        /* # límite para pantallas grandes */
+    margin: 30px auto;
+}
+
+/* Imagen principal del carrusel */
+.carousel-img {
+    width: 100%;
+    height: 500px;                 /* 🔒 altura fija REAL */
+    background-size: cover;        /* 🔥 recorte vertical */
+    background-position: center;   /* centra recorte */
+    background-repeat: no-repeat;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+
+/* ===============================
+   # BOTONES DEL CARRUSEL
+   =============================== */
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.65);
+    color: white;
+    border: none;
+    font-size: 36px;          /* # más grandes */
+    padding: 14px 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.carousel-btn.left {
+    left: 15px;               /* # dentro de la imagen */
+}
+
+.carousel-btn.right {
+    right: 15px;
+}
+
+.carousel-btn:disabled {
+    opacity: 0.3;             /* # visual cuando no se puede avanzar */
+    cursor: not-allowed;
+}
+/* ===============================
+   # CAJA DE INDICACIONES
+   =============================== */
+
+#indicacion-box {
+    max-width: 900px;
+    margin: 25px auto 10px auto;
+    padding: 18px 25px;
+    background: linear-gradient(135deg, #004b87, #084298);
+    color: white;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(13,110,253,0.35);
+}
+
+/* Texto de la indicación */
+#indicacion {
+    font-size: 1.25rem;       /* # más elegante, no exagerado */
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    margin: 0;
+}
+/* # ANIMACIÓN SUAVE */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* ========================= */
+/* #PROGRESO - CONTENEDOR */
+/* ========================= */
+.progreso-container {
+    max-width: 720px;
+    margin: 25px auto 10px auto;
+    text-align: left;
+}
+
+/* #PROGRESO - TEXTO */
+.progreso-texto {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #495057;
+    margin-bottom: 6px;
+}
+
+/* #PROGRESO - BARRA */
+.progreso-barra {
+    height: 12px;
+    border-radius: 10px;
+    background-color: #e9ecef;
+    overflow: hidden;
+}
+
+/* #PROGRESO - RELLENO */
+.progreso-fill {
+    background: linear-gradient(90deg, #004b87, #004b87);
+    transition: width 0.4s ease;
+}
+/* ===============================
+   # AJUSTES PARA CELULAR
+   =============================== */
+
+@media (max-width: 768px) {
+    .carousel-img {
+        height: 50vh;         /* # más cómodo en móvil */
+    }
+
+    #indicacion {
+        font-size: 1.1rem;
+    }
+}
+/* ===============================
+   # TARJETA TITULO DEL AULA
+   =============================== */
+
+.titulo-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: #004b87;
+    padding: 14px 28px;
+    border-radius: 16px;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+/* Icono del título */
+.titulo-icono {
+    font-size: 1.9rem;
+}
+
+/* Texto del aula */
+.titulo-espacio {
+    letter-spacing: 0.6px;
+}
+/* ===============================
+   # BOTON REGRESAR SUPERIOR
+   =============================== */
+
+.btn-regresar {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    color: #004b87;
+    border: 2px solid #004b87;
+    padding: 8px 16px;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    z-index: 50;
+}
+
+/* Hover elegante */
+.btn-regresar:hover {
+    background: #004b87;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* Icono */
+.btn-regresar i {
+    font-size: 1.3rem;
+}
+.pantalla-marco {
+    position: relative; /* # necesario para botón regresar */
+}
+.titulo-animado {
+    animation: fadeUp 0.9s ease-out both;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.titulo-animado h1 {
+    animation: fadeUp 0.8s ease-out both;
+}
+
+.titulo-animado h2 {
+    animation: fadeUp 0.8s ease-out both;
+    animation-delay: 0.15s;
+}
+/* ===============================
+   # TOAST PERSONALIZADO
+   =============================== */
+.toast-custom {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    padding: 14px 22px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+    z-index: 9999;
+}
+
+.toast-custom.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Colores */
+.toast-info { background: #004b87; }
+.toast-success { background: #28a745; }
+.toast-warning { background: #ffc107; color: #212529; }
+.toast-danger { background: #dc3545; }
+
+/* ===============================
+   # MODAL CONFIRMACIÓN
+   =============================== */
+.modal-confirm {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9998;
+}
+
+.modal-confirm.hidden {
+    display: none;
+}
+
+.modal-box {
+    background: white;
+    border-radius: 16px;
+    padding: 25px 30px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    animation: fadeUp 0.4s ease;
+}
+
+.modal-box h3 {
+    color: #dc3545;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+/* ===============================
+   # BOTONES AGREGAR / ELIMINAR
+   =============================== */
+
+/* 🔵 AGREGAR */
+.btn-agregar {
+    background: linear-gradient(135deg, #0d6efd, #0a58ca);
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 10px 18px;
+    border: none;
+    box-shadow: 0 6px 18px rgba(13,110,253,0.35);
+    transition: all 0.25s ease;
+}
+
+.btn-agregar:hover {
+    background: linear-gradient(135deg, #0a58ca, #084298);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(13,110,253,0.45);
+}
+
+/* 🔴 ELIMINAR */
+.btn-eliminar {
+    background: linear-gradient(135deg, #dc3545, #b02a37);
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 10px 18px;
+    border: none;
+    box-shadow: 0 6px 18px rgba(220,53,69,0.35);
+    transition: all 0.25s ease;
+}
+
+.btn-eliminar:hover {
+    background: linear-gradient(135deg, #b02a37, #842029);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(220,53,69,0.45);
+}
