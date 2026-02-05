@@ -1,14 +1,13 @@
-# Imagen base con Java 17
-FROM eclipse-temurin:17-jdk
-
-# Directorio de trabajo
+# ETAPA 1: Build
+FROM maven:3.9.9-eclipse-temurin-17 AS build
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Copiar el jar generado
-COPY target/*.jar app.jar
-
-# Puerto dinámico para Render
+# ETAPA 2: Runtime
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
-
-# Ejecutar la app
 ENTRYPOINT ["java", "-jar", "app.jar"]
